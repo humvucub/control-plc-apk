@@ -29,3 +29,18 @@ android.permissions = INTERNET, ACCESS_NETWORK_STATE, ACCESS_WIFI_STATE
 
 # (list) Android SDK build-tools version (Opcional pero asegura que descargue build-tools y aidl)
 android.sdk_build_tools_version = 34.0.0
+
+# (int) Target Android API, should be as high as possible.
+android.api = 34
+
+# (int) Minimum API your APK will support.
+android.minapi = 21
+
+# (str) Android NDK version to use
+android.ndk = 25b
+
+# (str) Android SDK version to use
+android.sdk = 34
+
+# (list) Android SDK build-tools version
+android.sdk_build_tools_version = 34.0.0
