@@ -1,0 +1,8 @@
+git init
+git config --global user.email "hum.ajawxib@gmail.com"
+git config --global user.name "humvucub"
+git add .
+git commit -m "Primer commit: configurar compilador APK"
+git branch -M main
+git remote add origin https://github.com/humvucub/control-plc-apk.git
+git push -u origin main

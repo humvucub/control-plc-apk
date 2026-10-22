@@ -1,0 +1,26 @@
+name: Compilar APK de Android
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Copiar código del repositorio
+      uses: actions/checkout@v3
+
+    - name: Compilar con Buildozer
+      uses: kivy/buildozer-action@v1
+      with:
+        filename: buildozer.spec
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Guardar el APK generado
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-plc-release
+        path: bin/*.apk
