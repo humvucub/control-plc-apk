@@ -10,17 +10,33 @@ jobs:
 
     steps:
     - name: Copiar código del repositorio
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Compilar con Buildozer
-      uses: kivy/buildozer-action@v1
+    - name: Configurar Java (JDK 17)
+      uses: actions/setup-java@v4
       with:
-        filename: buildozer.spec
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        distribution: 'temurin'
+        java-version: '17'
 
-    - name: Guardar el APK generado
-      uses: actions/upload-artifact@v3
+    - name: Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Instalar dependencias del sistema y Buildozer
+      run: |
+        sudo apt update
+        sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev lldb libltdl-dev
+        pip3 install --upgrade pip
+        pip3 install --user --upgrade buildozer cython
+
+    - name: Compilar APK con Buildozer
+      run: |
+        export PATH=$PATH:~/.local/bin
+        buildozer -v android debug
+
+    - name: Subir APK generado
+      uses: actions/upload-artifact@v4
       with:
         name: app-plc-release
         path: bin/*.apk
