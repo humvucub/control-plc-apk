@@ -26,3 +26,6 @@ orientation = portrait
 
 # (list) Permissions
 android.permissions = INTERNET, ACCESS_NETWORK_STATE, ACCESS_WIFI_STATE
+
+# (list) Android SDK build-tools version (Opcional pero asegura que descargue build-tools y aidl)
+android.sdk_build_tools_version = 34.0.0
